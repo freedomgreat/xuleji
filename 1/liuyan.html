@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title><?=$ini->wz(1)?> - <?=$db->lxfs(101)?></title>
+<meta name="keywords" content="<?=$ini->wz(2)?>">
+<meta name="description" content="<?=$ini->wz(3)?>">
+<meta name="Author" content="ihaofan.com" />
+<meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" /> 
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=yes">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<LINK href="css/public.css" rel="stylesheet" type="text/css" charset="UTF-8">
+<LINK href="css/product.css" rel="stylesheet" type="text/css" charset="UTF-8">
+<LINK href="icon/iconfont.css" rel="stylesheet" type="text/css" charset="UTF-8">
+<link href="css/animate.min.css" rel="stylesheet" type="text/css" charset="UTF-8">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"  charset="UTF-8"/>
+<link href="css/swiper.min.css" rel="stylesheet" type="text/css"  charset="UTF-8"/>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="js/swiper.jquery.min.js"></script>
+<script type="text/javascript" src="js/iscroll-probe.js"></script>
+<style>
+.page{    width: 98%; margin-left:1%; padding-bottom:8px;}
+ .label {
+
+
+  }
+  .label-primary {
+    
+  }
+  #thefooter {
+	  width:98%;
+	  margin-left:1%;
+	  height:0.52rem;
+	  border-radius: 4px;
+	  margin-bottom:8px;
+	  display:block;
+	  background-color: rgb(17,122,89);
+	  font-size:14px;
+	  line-height:0.52rem;
+
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+  }
+   .pagination {
+    border-radius: 4px;
+  font-size:12px;
+  
+  display:inline-block;
+  margin:0 auto;
+  }
+  #thepage {
+    float: right;
+    margin-right: 15px;
+    display: inline;
+  }
+   .pagination > li {
+     float:left;
+     display: block;
+  }
+   .pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 7px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: rgb(17,122,89);
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width:auto;
+  }
+   .pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+   .pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+   .pagination > .active > a, .pagination > .active > span, .pagination > .active  > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus,  .pagination > .active > span:focus {
+    z-index: 2;
+    color:  rgb(255,255,255);
+    cursor: default;
+    background-color: rgb(17,122,89);
+    border-color: rgb(17,122,89);
+}
+ .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li >  a:focus, .pagination > li > span:focus {
+    color: rgb(17,122,89);
+    background-color: #eee;
+    border-color: #ddd;
+}
+</style>
+<script>
+		(function(win, doc) {
+			var isMobile = (function(userAgent) {
+				'use strict';	
+				return !!userAgent.match(/android|webos|ip(hone|ad|od)|opera (mini|mobi|tablet)|iemobile|windows.+(phone|touch)|mobile|fennec|kindle (Fire)|Silk|maemo|blackberry|playbook|bb10\; (touch|kbd)|Symbian(OS)|Ubuntu Touch/i);
+			}(navigator.userAgent));
+	
+			// 前提条件 ip6 的高清视觉稿
+			var fixScreen = function() {
+				var rootFootsize;
+				var dpr;
+				var docEl;
+				var width;
+	
+				docEl = doc.documentElement;
+				dpr = win.devicePixelRatio || 1;
+	
+				// 设置 html dpr值，用于 css hack
+				docEl.setAttribute('data-dpr', dpr);
+	
+				var page = doc.querySelector('.ui-page');
+				var pageContent = doc.querySelector('.ui-page-content');
+	
+				var refreshRem = function() {
+					// 适配屏幕宽度为 320px - 540px
+					width = Math.min(docEl.clientWidth, 540);
+					width = width < 320 ? 320 : width;
+	
+					if (page) {
+						// 设置page的最大最小宽度
+						page.style.minWidth = 320 + 'px';
+						page.style.maxWidth = 540 + 'px';
+	
+						// 设置 page 宽度
+						page.style.width = width + 'px';
+						pageContent.style.width = width + 'px';
+					}
+	
+					// 将 ip6 视觉稿 rem 的值设置为 50，其他按比例处理
+					rootFootsize = width * 2 / 750 * 50;
+	
+					// 设置 html 元素的字体大小基准值
+					docEl.style.fontSize = rootFootsize + "px";
+				};
+	
+				// 在页面调整时更新 rem
+				win.addEventListener('resize', function(e) {
+					refreshRem();
+				}, false);
+	
+				// 在页面显示时更新 rem
+				win.addEventListener('pageshow', function(e) {
+					refreshRem();
+				}, false);
+	
+				refreshRem();
+	
+				// 给js调用的，某一屏幕宽度下 rem 和 px 之间的转换函数
+				window.px2rem = function(px) {
+					return px / rootFootsize;
+				};
+				window.rem2px = function(rem) {
+					return rem * rootFootsize;
+				};
+	
+				window.rootFootsize = rootFootsize;
+			};
+	
+			if (isMobile) {
+				doc.addEventListener('DOMContentLoaded', fixScreen, false);
+			} else {
+				doc.addEventListener('DOMContentLoaded', function(e) {
+					doc.documentElement.style.fontSize = '50px';
+				}, false);
+			}
+		})(window, document);
+	</script>
+</head>
+<body onload="loaded()">
+	<div class="header">
+		<div class="headerbg"></div>
+		<div class="hback">
+			<a href="/"><i class="iconfont">&#xe644;</i></a>
+		</div>
+		<div class="htitle">
+			模版一
+		</div>
+		<div class="hlogin">
+			<a href="javascript:void(0)" id="ulogin"><i class="iconfont">&#xe894;</i></a>
+		</div>
+        <div class="navbar-collapse collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class=""><a href="/"><span class="iconfont">&#xe8b3;</span>网站首页</a></li>
+            <li><a href="/?v/job/0-1/">关于我们</a></li>
+            <li><a href="/?v/job/0-1/">家装案例</a></li>
+            <li><a href="/?v/job/0-1/">服务团队</a></li>
+            <li><a href="/?v/job/0-1/">我要装修</a></li>
+            <li><a href="/?v/bangzhu.html">锯房加工</a></li>
+            <li><a href="/?v/bangzhu.html">家具制作</a></li>
+            <li><a href="/?v/bangzhu.html">行业资讯</a></li>
+            <li><a href="/?v/lxwm.html">联系我们</a></li>
+        </ul>
+        </div>
+	</div>
+    <div id="wrapper">
+	  <div id="scroller">
+			<div class="view">
+                <div class="pro">
+					<div class="pro_container">
+						<div class="hf-1px-line-up"></div>
+						<div class="about">
+							 <form class="order_f" style="top:410px;" method="POST" action="/?v/liuyan.html" name="form" onsubmit="return CheckPost();">
+                             <input name="class" type="hidden" value="0">
+                             <div class="item item-name">
+                               <input name="chenghu" type="text" size="20" maxlength="15" autofocus required class="txt-input txt-username" id="chenghu" placeholder="您的称呼（*必填）">
+                             </div>
+                             <div class="item item-name">
+                               <input name="dianhua" type="text" size="20" maxlength="12" autofocus required class="txt-input txt-username" id="dianhua" placeholder="填写电话（*必填）">
+                             </div>
+                             <div class="item item-name">
+                               <input name="loupan" type="text" size="20" maxlength="15" autofocus required class="txt-input txt-username" id="loupan" placeholder="楼盘小区（*必填）">
+                             </div>
+                             <div class="item item-name">
+                               <input name="mianji" type="text" size="20" maxlength="15" autofocus required class="txt-input txt-username" id="mianji" placeholder="房屋面积㎡（*必填）">
+                             </div>
+                             <div class="item item-name">
+                               <input name="dizhi" type="text" size="20" maxlength="50" autofocus required class="txt-input txt-username" id="dizhi" placeholder="填写地址（*必填）">
+                             </div>
+                             <div class="validation">
+                                             <input type="text" placeholder="验证码（*必填）"  class="txt-input txt-code" name="checkCode" size="10">
+                                              <script language="javascript">   
+                                            function change(){   
+                                            var img =document.getElementById("ImageButton1");   
+                                            img.src=img.src+"?";   
+                                            }</script>
+                                            <img alt="验证码看不清？点击图片换一个！" src="/yzm.php?time=0.7792123819907761" id="codeimg" onclick="this.src='/yzm.php?time=' + Math.random();" align="absmiddle">
+                                            <script language="javascript" type="text/javascript">document.getElementById('codeimg').src = '/yzm.php?time=' + Math.random(); </script>
+                                              <div style="clear:both"></div>
+                                              <SCRIPT language=javascript> 
+											function CheckPost(){
+											if (form.chenghu.value==""){
+											alert("╮(╯_╰)╭   请填写您的称呼！谢谢！");
+											form.chenghu.focus();
+											return false;}
+											if (form.dianhua.value==""){
+											alert("╮(╯_╰)╭   请填写您的联系电话！谢谢！");
+											form.dianhua.focus();
+											return false;}
+											if (form.checkCode.value==""){
+											alert("╮(╯_╰)╭   请填写验证码！谢谢！");
+											form.checkCode.focus();
+											return false;}}
+											</SCRIPT>
+                                            </div>
+                               <button type="submit" class="artBody_more">提交预约</button>
+                               </form>
+                                <a href="/" onClick="" title="返回列表" class="back" style="margin:1rem auto">返回列表</a>
+     					</div>
+
+					</div>
+				</div>
+                <!-- 商品列表 -->
+				<div class="footer">
+                     <div class="hf-1px-line-up"></div>
+					<ul class="hf-footer-links">
+						<li>
+							<a href="/">
+								<i class="iconfont">&#xe8e3;</i>
+								分享网站
+							</a>
+						</li>
+						<li>
+							<a href="/">
+								<i class="iconfont">&#xe8f0;</i>
+								公司地图
+							</a>
+						</li>
+						<li>
+							<a href="tel:18241333581" ><i class="iconfont">&#xe8ed;</i>
+								联系我们</a>
+						</li>
+						<li id="indexToTopb">
+							<i class="iconfont">&#xe6a3;</i>
+							返回顶部
+						</li>
+					</ul>
+					 <div class="hf-1px-line-up"></div>
+					 <div class="hf-footer-copyright">Copyright © 2013-2016 浩繁Ihaofan.com 版权所有</div>
+				</div>
+
+
+			</div>
+
+			<!--div class="view" style="background: #000">登录</div-->
+	  </div>
+    </div>
+	<div class="bottom-to-top" id="indexToTop"> <img src="images/scroll-to-top-icon.png" style="width: 100%;"> </div>
+    <script> 
+
+		var header = $('.header');
+		var headerbg = $(".headerbg");
+		header.addClass('headertop');
+		headerbg.css({'opacity':1});
+		var myScroll;
+		var showPageID = $('#showPageID').val();
+		var cLassID = $('#cLassID').val();
+		var pro_list = $('#pro_list');
+		var numList = 6;
+ 		$('#indexToTop').click(function(){
+			myScroll.scrollTo(0, 0, 1000,IScroll.utils.ease.circular);
+		});
+		$('#indexToTopb').click(function(){
+			myScroll.scrollTo(0, 0, 1000,IScroll.utils.ease.circular);
+		});
+		$('.hlogin').click(function(){
+			var headerbg = $('.headerbg');
+			var headerbg_o = $('.headerbg').css('opacity');
+			if($('.navbar-collapse').hasClass('in')){
+				$('.navbar-collapse').removeClass('in');
+				headerbg.css({'opacity':headerbg_o});
+				headerbg_p = true;
+			}else{
+				$('.navbar-collapse').addClass('in');
+				headerbg.css({'opacity':'1.043'});
+				headerbg_p = false;
+			}
+		});
+		$('.dlist > a').click(function(){
+			var index = $('.dlist > a').index(this);
+			if($('.dlist').eq(index).hasClass('active')){
+				$('.dlist').eq(index).removeClass('active');
+			}else{
+				$('.dlist').removeClass('active');
+				$('.dlist').eq(index).addClass('active');
+			}
+		});
+		
+		function loaded () {
+			myScroll = new IScroll('#wrapper', {
+				scrollX: true,
+				scrollY: true,
+				momentum: false,
+			    tap: true,
+				click:true,
+				probeType: 3,
+				scrollbars:true,
+				fadeScrollbars:true,
+				freeScroll:false
+			});
+			myScroll.on('scroll', updatePosition);
+			myScroll.on('scrollEnd', updateWindow);
+		}
+
+		//$('#ulogin').on('tap',doSomething);
+		//$('#indexToTop').on('tap',goto);
+		/*function doSomething(){
+			var vwidth = $('.view').width();
+			myScroll.scrollTo(-vwidth,0,1000,IScroll.utils.ease.circular);
+		}
+		function goto(){
+			var vwidth = $('.view').width();
+			myScroll.scrollTo(0, 0, 1000,IScroll.utils.ease.circular);
+		}*/
+		function updateWindow(){
+			var vwidth = $('.view').width();
+			if(this.directionX == 1){
+				console.log('往左滑动...............'+(this.directionX));
+				if((-1*(this.x>>0))> 60){
+					myScroll.scrollTo(-vwidth,0,1000,IScroll.utils.ease.circular);
+				}else{
+					myScroll.scrollTo(0,0,1000,IScroll.utils.ease.circular);
+				}
+				/*else{
+					this.x = -vwidth;
+					//myScroll.scrollTo(-vwidth,0,1000,IScroll.utils.ease.circular);
+				}*/
+			}else{
+				console.log('往右滑动...............'+(this.directionX)+this.x);
+				if((this.x>>0)> -300 && (this.x>>0)< -20){
+					console.log('aaaaa');
+					myScroll.scrollTo(0,0,1000,IScroll.utils.ease.circular);
+				}
+			}
+		}
+		function updatePosition(){
+			var wrapper = $('#wrapper').height();
+			var header = $('.header');
+			var headerbg = $(".headerbg");
+			var indexToTop = $('#indexToTop');
+			var indexToTopy = $('#indexToTop').position().top;
+			var vwidth = $('.view').width();
+			//var stype = tyep;
+			var opacity;
+		/*	if((-1*this.y>>0)<=150){
+                  opacity = ((-1*this.y>>0))*0.007;
+				  if(header.hasClass('headertop')){
+					  header.removeClass('headertop');
+				  }
+			}*/
+		/*	if((-1*this.y>>0)>150 && !header.hasClass('headertop')){
+				header.addClass('headertop');
+			}*/
+			if((-1*this.y>>0)>350 && !indexToTop.hasClass('bottom-to-tops')){
+				indexToTop.addClass('bottom-to-tops');
+			}else if((-1*this.y>>0)<350 && indexToTop.hasClass('bottom-to-tops')){
+				indexToTop.removeClass('bottom-to-tops');
+			}
+
+
+			/*if((-1*(this.x>>0))< 50){
+				this.x = 0;
+			}else{
+				this.x = -vwidth;
+				//myScroll.scrollTo(-vwidth,0,1000,IScroll.utils.ease.circular);
+			}*/
+			//header.css({top:((-1*this.y>>0))+'px'});
+			//headerbg.css({'opacity':opacity});
+			//indexToTop.css({top:((-1*this.y>>0)+wrapper-45)+'px'});
+		}
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+	</script>
+</body>
+</html>
